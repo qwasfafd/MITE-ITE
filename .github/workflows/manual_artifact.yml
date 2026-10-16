@@ -17,6 +17,11 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
+      - name: Place Minecraft jar in local Maven cache
+        run: |
+          mkdir -p ~/.m2/repository/com/mojang/minecraft/1.6.4-MITE
+          cp 1.6.4-MITE.jar ~/.m2/repository/com/mojang/minecraft/1.6.4-MITE/minecraft-1.6.4-MITE.jar
+
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
