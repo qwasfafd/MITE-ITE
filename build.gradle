@@ -32,7 +32,8 @@ configurations {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    minecraft files('1.6.4-MITE.jar')
+
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     fml "com.github.MinecraftIsTooEasy:FishModLoader:3.4.2"
