@@ -3,10 +3,10 @@ package net.xiaoyu233.mitemod.miteite.events.listener;
 import moddedmite.rustedironcore.api.event.listener.ITickListener;
 import net.minecraft.EntityPlayer;
 import net.minecraft.ItemStack;
-import net.minecraft.MinecraftServer;
 import net.minecraft.Potion;
 import net.minecraft.PotionEffect;
 import net.minecraft.World;
+import net.minecraft.server.MinecraftServer;
 import net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit;
 
 public class TickListener implements ITickListener {
@@ -27,7 +27,7 @@ public class TickListener implements ITickListener {
                     ItemStack chestplate = player.getCurrentArmor(2);
                     ItemStack helmet = player.getCurrentArmor(3);
 
-                    // 最后参数 true 开启粒子与图标，999999 tick 约 138 小时，无限刷新
+                    // 999999 tick = 约138小时，无限刷新，最后参数 true 确保显示图标和粒子
                     if (boots != null && boots.itemID == MITEITEItemRegistryInit.VIBRANIUM_BOOTS.itemID) {
                         player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 999999, 0, true));
                     }
