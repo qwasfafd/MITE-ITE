@@ -45,15 +45,7 @@ public class MITEITERICEvents extends Handlers {
         });
         GravelDrop.registerGravelLootEntry(new GravelDropHandler.GravelLootEntry((
                 GravelDropHandler.AdamantiumEntry.weight()) / 3.0f, info -> MITEITEItemRegistryInit.VIBRANIUM_NUGGET.itemID));
-        BeaconUpdate.register(new IBeaconUpdateHandler() {
-            public boolean onBlockValidModify(TileEntityBeacon tileEntityBeacon, int blockID, boolean original) {
-                return original || blockID == MITEITEBlockRegistryInit.blockVibranium.blockID;
-            }
-
-            public boolean onItemValidModify(TileEntityBeacon tileEntityBeacon, ItemStack itemStack, boolean original) {
-                return original || itemStack.getItem() == MITEITEItemRegistryInit.VIBRANIUM_INGOT;
-            }
-        });
+        
         SpawnCondition.register(new MITEITESpawnConditions());
         Smelting.register(new FurnaceExtend());
         Crafting.register(new CraftingRegistry());
@@ -81,19 +73,7 @@ public class MITEITERICEvents extends Handlers {
         });
         PlayerAttribute.register(new PlayerAttributeListener());
         //EntityAttribute.register(new EntityAttributeListener());
-        ArmorModel.register(new IArmorModelListener() {
-            @Override
-            public ResourceLocation getArmorTexture(ItemArmor itemArmor, int slotIndex) {
-                if (!(itemArmor.getArmorMaterial() == Materials.vibranium)) return null;
-                String var3 = String.format("textures/models/armor/%s_layer_%d.png", itemArmor.getTextureFilenamePrefix(), slotIndex == 2 ? 2 : 1);
-                ResourceLocation var4 = ITE_TEXTURE_MAP.get(var3);
-                if (var4 == null) {
-                    var4 = new ResourceLocation("miteite", var3);
-                    ITE_TEXTURE_MAP.put(var3, var4);
-                }
-                return var4;
-            }
-        });
+        
         Tick.register(new TickListener());
         Achievement.register(new AchievementListener());
     }
