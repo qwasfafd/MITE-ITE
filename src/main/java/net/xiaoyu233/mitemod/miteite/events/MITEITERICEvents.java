@@ -26,7 +26,7 @@ public class MITEITERICEvents extends Handlers {
     public static void register() {
         ArrowRegister.register(new IArrowRegisterListener() {
             @Override
-            public void onRegister(ArrowRegistry registry) {
+            // public void onRegister(ArrowRegistry registry) {
                 registry.register(Materials.vibranium);
             }
         });
@@ -85,7 +85,7 @@ public class MITEITERICEvents extends Handlers {
             });
         });
         PlayerAttribute.register(new PlayerAttributeListener());
-        EntityAttribute.register(new EntityAttributeListener());
+        //EntityAttribute.register(new EntityAttributeListener());
         ArmorModel.register(new IArmorModelListener() {
             @Override
             public ResourceLocation getArmorTexture(ItemArmor itemArmor, int slotIndex) {
