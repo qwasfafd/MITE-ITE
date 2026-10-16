@@ -1,28 +1,15 @@
 package net.xiaoyu233.mitemod.miteite.events.listener;
 
 import moddedmite.rustedironcore.api.event.listener.ITickListener;
-import net.minecraft.World;
-import net.minecraft.server.MinecraftServer;
-import net.xiaoyu233.mitemod.miteite.api.ITEWorldInfoShared;
-import net.xiaoyu233.mitemod.miteite.util.Configs;
-import net.minecraft.EntityPlayer;
-import net.minecraft.ItemStack;
-import net.minecraft.Potion;
-import net.minecraft.PotionEffect;
+import net.minecraft.*;
 import net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit;
+
 public class TickListener implements ITickListener {
     @Override
     public void onServerTick(MinecraftServer server) {
-        if (!Configs.GameMechanics.FIRST_DAY_LONGER_DAY_TIME.get()) return;
-        World world = server.getEntityWorld();
-        ITEWorldInfoShared info = (ITEWorldInfoShared) world.getWorldInfo().shared;
-        if (info.ite$isTimeBack()) return;
-        if (world.getTotalWorldTime() == 12000L) {
-            info.ite$setTimeBack(true);
-            world.setTotalWorldTime(0L);
-            // ==== 振金装备效果 START ====
-            if (server.getConfigurationManager() != null) {
-                for (Object obj : server.getConfigurationManager().playerEntityList) {
+        for (World world : server.worldServers) {
+            if (world != null && world.playerEntities != null) {
+                for (Object obj : world.playerEntities) {
                     if (obj instanceof EntityPlayer) {
                         EntityPlayer player = (EntityPlayer) obj;
                         if (player.worldObj.isRemote) continue;
@@ -32,26 +19,22 @@ public class TickListener implements ITickListener {
                         ItemStack chestplate = player.getCurrentArmor(2);
                         ItemStack helmet = player.getCurrentArmor(3);
 
-                        // 振金靴子：永久速度 I
-                        if (boots != null && boots.itemID == MITEITEItemRegistryInit.VIBRANIUM_BOOTS.itemID) {
-                            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2, 0));
+                        // 最后参数 true 开启粒子与图标，999999 tick 约 138 小时，脱下前无限刷新
+                        if (boots != null && boots.getItem() == MITEITEItemRegistryInit.VIBRANIUM_BOOTS) {
+                            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 999999, 0, true));
                         }
-                        // 振金护腿：永久跳跃 I
-                        if (leggings != null && leggings.itemID == MITEITEItemRegistryInit.VIBRANIUM_LEGGINGS.itemID) {
-                            player.addPotionEffect(new PotionEffect(Potion.jump.id, 2, 0));
+                        if (leggings != null && leggings.getItem() == MITEITEItemRegistryInit.VIBRANIUM_LEGGINGS) {
+                            player.addPotionEffect(new PotionEffect(Potion.jump.id, 999999, 0, true));
                         }
-                        // 振金胸甲：永久抗性 I
-                        if (chestplate != null && chestplate.itemID == MITEITEItemRegistryInit.VIBRANIUM_CHESTPLATE.itemID) {
-                            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 2, 0));
+                        if (chestplate != null && chestplate.getItem() == MITEITEItemRegistryInit.VIBRANIUM_CHESTPLATE) {
+                            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 999999, 0, true));
                         }
-                        // 振金头盔：永久抗火 I
-                        if (helmet != null && helmet.itemID == MITEITEItemRegistryInit.VIBRANIUM_HELMET.itemID) {
-                            player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 2, 0));
+                        if (helmet != null && helmet.getItem() == MITEITEItemRegistryInit.VIBRANIUM_HELMET) {
+                            player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 999999, 0, true));
                         }
                     }
                 }
             }
-            // ==== 振金装备效果 END ====
         }
     }
 }
