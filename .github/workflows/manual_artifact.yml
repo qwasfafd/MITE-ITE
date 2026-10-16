@@ -17,10 +17,10 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Place Minecraft jar in local Maven cache
+      - name: Place Minecraft jar in fml-loom cache
         run: |
-          mkdir -p ~/.m2/repository/com/mojang/minecraft/1.6.4-MITE
-          cp 1.6.4-MITE.jar ~/.m2/repository/com/mojang/minecraft/1.6.4-MITE/minecraft-1.6.4-MITE.jar
+          mkdir -p /home/runner/.gradle/caches/fml-loom/1.6.4-MITE/
+          cp 1.6.4-MITE.jar /home/runner/.gradle/caches/fml-loom/1.6.4-MITE/1.6.4-MITE.jar
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
