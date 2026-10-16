@@ -1,5 +1,9 @@
 package net.xiaoyu233.mitemod.miteite.item;
-
+import net.minecraft.World;
+import net.minecraft.EntityPlayer;
+import net.minecraft.ItemStack;
+import net.minecraft.Potion;
+import net.minecraft.PotionEffect;
 import moddedmite.rustedironcore.api.event.events.CraftingRecipeRegisterEvent;
 import net.minecraft.*;
 import net.xiaoyu233.fml.FishModLoader;
@@ -21,13 +25,45 @@ public class MITEITEItemRegistryInit extends Item {
     public static final Item OBSIDIAN_STICK = new Item(Constant.getNextItemID(),Material.obsidian,"obsidian_stick").setCreativeTab(tabMITEITE);
     public static final ItemAxe VIBRANIUM_AXE = (ItemAxe) new AxeItem(Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
     public static final ItemBattleAxe VIBRANIUM_BATTLE_AXE = (ItemBattleAxe) new BattleAxeItem(Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
-    public static final ItemArmor VIBRANIUM_BOOTS = (ItemArmor) new ItemBoots(Constant.getNextItemID(), Materials.vibranium,false).setCreativeTab(tabMITEITE);
+public static final ItemArmor VIBRANIUM_BOOTS = (ItemArmor) new ItemBoots(Constant.getNextItemID(), Materials.vibranium, false) {
+        @Override
+        public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+            super.onArmorTick(world, player, itemStack);
+            if (!world.isRemote) {
+                player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2, 0));
+            }
+        }
+    }.setCreativeTab(TAB_ITE);
     public static final ItemBow VIBRANIUM_BOW = (ItemBow) new ItemBow(Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
-    public static final ItemArmor VIBRANIUM_CHESTPLATE = (ItemArmor) new ItemCuirass(Constant.getNextItemID(), Materials.vibranium, false).setCreativeTab(tabMITEITE);
+    public static final ItemArmor VIBRANIUM_CHESTPLATE = (ItemArmor) new ItemCuirass(Constant.getNextItemID(), Materials.vibranium, false) {
+        @Override
+        public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+            super.onArmorTick(world, player, itemStack);
+            if (!world.isRemote) {
+                player.addPotionEffect(new PotionEffect(Potion.resistance.id, 2, 0));
+            }
+        }
+    }.setCreativeTab(TAB_ITE);
     public static final ItemDagger VIBRANIUM_DAGGER = (ItemDagger) ReflectHelper.createInstance(ItemDagger.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
-    public static final ItemArmor VIBRANIUM_HELMET = (ItemArmor) new ItemHelmet(Constant.getNextItemID(), Materials.vibranium,false).setCreativeTab(tabMITEITE);
+    public static final ItemArmor VIBRANIUM_HELMET = (ItemArmor) new ItemHelmet(Constant.getNextItemID(), Materials.vibranium, false) {
+        @Override
+        public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+            super.onArmorTick(world, player, itemStack);
+            if (!world.isRemote) {
+                player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 2, 0));
+            }
+        }
+    }.setCreativeTab(TAB_ITE);
     public static final Item VIBRANIUM_INGOT = new ItemIngot(Constant.getNextItemID(),Materials.vibranium).setCreativeTab(tabMITEITE);
-    public static final ItemArmor VIBRANIUM_LEGGINGS = (ItemArmor) new ItemLeggings(Constant.getNextItemID(), Materials.vibranium,false).setCreativeTab(tabMITEITE);
+    public static final ItemArmor VIBRANIUM_LEGGINGS = (ItemArmor) new ItemLeggings(Constant.getNextItemID(), Materials.vibranium, false) {
+        @Override
+        public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+            super.onArmorTick(world, player, itemStack);
+            if (!world.isRemote) {
+                player.addPotionEffect(new PotionEffect(Potion.jump.id, 2, 0));
+            }
+        }
+    }.setCreativeTab(TAB_ITE);
     public static final ItemNugget VIBRANIUM_NUGGET = (ItemNugget) new NuggetItem(Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
     public static final ItemPickaxe VIBRANIUM_PICKAXE = (ItemPickaxe) ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
     public static final ItemShovel VIBRANIUM_SHOVEL = (ItemShovel) ReflectHelper.createInstance(ItemShovel.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.vibranium).setCreativeTab(tabMITEITE);
