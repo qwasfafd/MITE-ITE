@@ -1,5 +1,5 @@
 package net.xiaoyu233.mitemod.miteite.events;
-import net.xiaoyu233.fml.reload.event.PlayerTickEvent;
+
 import net.minecraft.EntityPlayer;
 import net.minecraft.Potion;
 import net.minecraft.PotionEffect;
@@ -30,25 +30,7 @@ import net.xiaoyu233.mitemod.miteite.util.Constant;
 public class MITEITEFishEvents {
     
 
-    @Subscribe
-    public void handleChatCommand(HandleChatCommandEvent event) {
-        String par2Str = event.getCommand();
-        EntityPlayer player = event.getPlayer();
-        ICommandSender commandListener = event.getListener();
-        if (Minecraft.inDevMode()) {
-            World world = event.getWorld();
-            ItemStack itemStack;
-            NBTTagCompound compound;
-//            if (par2Str.startsWith("itemlevel setLevel")) {
-//                itemStack = player.getHeldItemStack();
-//                if (itemStack.stackTagCompound != null) {
-//                    compound = itemStack.stackTagCompound;
-//                    if (compound.hasKey("tool_level")) {
-//                        compound.setInteger("tool_level", Integer.parseInt(par2Str.substring(19)));
-//                        event.setExecuteSuccess(true);
-//                    }
-//                }
-//            }
+    
 //
 //            if (par2Str.startsWith("itemlevel setXp")) {
 //                itemStack = player.getHeldItemStack();
