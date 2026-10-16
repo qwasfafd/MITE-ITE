@@ -1,4 +1,8 @@
 package net.xiaoyu233.mitemod.miteite.events;
+import net.xiaoyu233.fml.reload.event.PlayerTickEvent;
+import net.minecraft.EntityPlayer;
+import net.minecraft.Potion;
+import net.minecraft.PotionEffect;
 
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.*;
@@ -25,6 +29,29 @@ import net.xiaoyu233.mitemod.miteite.util.Constant;
 
 public class MITEITEFishEvents {
     
+@Subscribe
+    public void onPlayerTick(PlayerTickEvent event) {
+        if (event.player == null || event.player.worldObj.isRemote) return;
+        EntityPlayer player = event.player;
+        ItemStack boots = player.getCurrentArmor(0);
+        ItemStack leggings = player.getCurrentArmor(1);
+        ItemStack chestplate = player.getCurrentArmor(2);
+        ItemStack helmet = player.getCurrentArmor(3);
+
+        // 999999 tick = 约138小时，穿上自动无限刷新，最后 true 让客户端显示图标
+        if (boots != null && boots.itemID == MITEITEItemRegistryInit.VIBRANIUM_BOOTS.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 999999, 0, true));
+        }
+        if (leggings != null && leggings.itemID == MITEITEItemRegistryInit.VIBRANIUM_LEGGINGS.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.jump.id, 999999, 0, true));
+        }
+        if (chestplate != null && chestplate.itemID == MITEITEItemRegistryInit.VIBRANIUM_CHESTPLATE.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 999999, 0, true));
+        }
+        if (helmet != null && helmet.itemID == MITEITEItemRegistryInit.VIBRANIUM_HELMET.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 999999, 0, true));
+        }
+    }
 
     @Subscribe
     public void handleChatCommand(HandleChatCommandEvent event) {
