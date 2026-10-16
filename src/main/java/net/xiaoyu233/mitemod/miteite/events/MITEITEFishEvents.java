@@ -25,6 +25,34 @@ import net.xiaoyu233.mitemod.miteite.util.Constant;
 
 public class MITEITEFishEvents {
     @Subscribe
+    public void onPlayerTick(net.xiaoyu233.fml.reload.event.PlayerTickEvent event) {
+        EntityPlayer player = event.player;
+        if (player == null || player.worldObj.isRemote) return;
+
+        ItemStack boots = player.getCurrentArmor(0);
+        ItemStack leggings = player.getCurrentArmor(1);
+        ItemStack chestplate = player.getCurrentArmor(2);
+        ItemStack helmet = player.getCurrentArmor(3);
+
+        // 振金靴子：永久速度 I
+        if (boots != null && boots.itemID == MITEITEItemRegistryInit.VIBRANIUM_BOOTS.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2, 0));
+        }
+        // 振金护腿：永久跳跃 I
+        if (leggings != null && leggings.itemID == MITEITEItemRegistryInit.VIBRANIUM_LEGGINGS.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.jump.id, 2, 0));
+        }
+        // 振金胸甲：永久抗性 I
+        if (chestplate != null && chestplate.itemID == MITEITEItemRegistryInit.VIBRANIUM_CHESTPLATE.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 2, 0));
+        }
+        // 振金头盔：永久抗火 I
+        if (helmet != null && helmet.itemID == MITEITEItemRegistryInit.VIBRANIUM_HELMET.itemID) {
+            player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 2, 0));
+        }
+    }
+
+    @Subscribe
     public void handleChatCommand(HandleChatCommandEvent event) {
         String par2Str = event.getCommand();
         EntityPlayer player = event.getPlayer();
