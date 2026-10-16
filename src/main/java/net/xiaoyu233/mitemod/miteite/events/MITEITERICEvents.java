@@ -2,8 +2,8 @@ package net.xiaoyu233.mitemod.miteite.events;
 
 import moddedmite.rustedironcore.api.event.Handlers;
 import moddedmite.rustedironcore.api.event.handler.GravelDropHandler;
-import moddedmite.rustedironcore.api.event.listener.*;
-import moddedmite.rustedironcore.api.item.ArrowRegistry;
+//import moddedmite.rustedironcore.api.event.listener.*;
+//import moddedmite.rustedironcore.api.item.ArrowRegistry;
 import moddedmite.rustedironcore.property.ItemProperties;
 import net.minecraft.*;
 import net.xiaoyu233.fml.FishModLoader;
@@ -24,12 +24,7 @@ public class MITEITERICEvents extends Handlers {
     private static final Map<String, ResourceLocation> ITE_TEXTURE_MAP = new HashMap<>();
 
     public static void register() {
-        ArrowRegister.register(new IArrowRegisterListener() {
-            @Override
-            // public void onRegister(ArrowRegistry registry) {
-                registry.register(Materials.vibranium);
-            }
-        });
+        
         FurnaceUpdate.register(new IFurnaceUpdateListener() {
             public int onFurnaceCookTimeTargetModify(TileEntityFurnace tileEntityFurnace, int original) {
                 ItemStack stackInSlot = tileEntityFurnace.getStackInSlot(0);
